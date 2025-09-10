@@ -73,6 +73,7 @@
             let zoomMin = 1;
             let zoomMax = 1;
             let zoomStep = 0.1;
+            let currentZoom = 1;
 
             function setStatus(msg) { $status.textContent = msg || ''; }
 
@@ -86,6 +87,8 @@
                 $btnZoomReset.classList.toggle('d-none', !showZoom);
                 // Disable zoom slider when paused or zoom unsupported
                 $zoomRange.disabled = !hasZoom || state !== 'running';
+                // Enable reset only when zoom differs from default
+                $btnZoomReset.disabled = !hasZoom || state !== 'running' || currentZoom === zoomDefault;
 
                 // Torch
                 $btnTorch.classList.toggle('d-none', !hasTorch || state === 'stopped');
@@ -139,12 +142,14 @@
                         $zoomRange.max = zoomMax;
                         $zoomRange.step = zoomStep;
                         $zoomRange.value = (settings && settings.zoom) ? settings.zoom : zoomDefault;
+                        currentZoom = (settings && settings.zoom) ? settings.zoom : zoomDefault;
 
                         // Labels x multiplier (rounded to 2 decimals)
                         $zoomMin.textContent = (Math.round(zoomMin * 100) / 100) + 'x';
                         $zoomMax.textContent = (Math.round(zoomMax * 100) / 100) + 'x';
                     } else {
                         hasZoom = false;
+                        currentZoom = zoomDefault;
                     }
 
                     // Torch
@@ -166,8 +171,11 @@
                     await html5QrCode.applyVideoConstraints({ advanced: [{ zoom: v }] });
                     // keep slider synced
                     $zoomRange.value = v;
+                    currentZoom = v;
                 } catch (err) {
                     console.warn('Zoom not applied:', err);
+                } finally {
+                    updateButtons();
                 }
             }
 
@@ -264,6 +272,7 @@
                     zoomMin = 1;
                     zoomMax = 1;
                     zoomStep = 0.1;
+                    currentZoom = zoomDefault;
                     $zoomRange.value = 1;
                     $zoomRange.min = 1;
                     $zoomRange.max = 1;
