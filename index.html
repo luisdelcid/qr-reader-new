@@ -20,7 +20,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <div id="zoom-in-out" class="d-flex justify-content-between mb-3 d-none">
+                            <div id="zoom-in-out" class="justify-content-between mb-3 d-none">
                                 <div id="zoom-min" class="small text-muted">x</div>
                                 <div class="flex-grow-1 mx-3">
                                     <input id="zoom-range" type="range" class="custom-range" />
@@ -79,6 +79,9 @@
             function updateButtons() {
                 // Zoom controls
                 const showZoom = hasZoom && state !== 'stopped';
+                // Bootstrap display utilities: remove `d-flex` when hiding and
+                // add it back when showing to avoid conflicts with `d-none`.
+                $zoomWrap.classList.toggle('d-flex', showZoom);
                 $zoomWrap.classList.toggle('d-none', !showZoom);
                 $btnZoomReset.classList.toggle('d-none', !showZoom);
                 // Disable zoom slider when paused or zoom unsupported
