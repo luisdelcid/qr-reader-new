@@ -78,8 +78,11 @@
 
             function updateButtons() {
                 // Zoom controls
-                $zoomWrap.classList.toggle('d-none', !hasZoom || state === 'stopped');
-                $btnZoomReset.classList.toggle('d-none', !hasZoom || state === 'stopped');
+                const showZoom = hasZoom && state !== 'stopped';
+                $zoomWrap.classList.toggle('d-none', !showZoom);
+                $btnZoomReset.classList.toggle('d-none', !showZoom);
+                // Disable zoom slider when paused or zoom unsupported
+                $zoomRange.disabled = !hasZoom || state !== 'running';
 
                 // Torch
                 $btnTorch.classList.toggle('d-none', !hasTorch || state === 'stopped');
@@ -112,7 +115,7 @@
                         : null;
 
                     // Zoom
-                    if (caps && 'zoom' in caps) {
+                    if (caps && typeof caps.zoom !== 'undefined') {
                         hasZoom = true;
                         // zoom can be a number or object (min/max/step). Handle both.
                         if (typeof caps.zoom === 'object') {
