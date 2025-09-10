@@ -200,8 +200,14 @@
 
                 const config = {
                     fps: 30,
-                    // qrbox opcional: dejar pantalla completa del contenedor (ya es 1:1)
-                    rememberLastUsedCamera: true
+                    // Asegura un área de escaneo cuadrada para ocupar todo el contenedor
+                    qrbox: (viewfinderWidth, viewfinderHeight) => {
+                        const minEdge = Math.min(viewfinderWidth, viewfinderHeight);
+                        return { width: minEdge, height: minEdge };
+                    },
+                    rememberLastUsedCamera: true,
+                    supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+                    formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE]
                 };
 
                 const onScanSuccess = (decodedText, decodedResult) => {
