@@ -217,7 +217,7 @@
                         const minEdge = Math.min(viewfinderWidth, viewfinderHeight);
                         return { width: minEdge, height: minEdge };
                     },
-                    rememberLastUsedCamera: true,
+                    rememberLastUsedCamera: false,
                     supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
                     formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
                     videoConstraints: squareCameraConstraints
@@ -236,7 +236,8 @@
                     let started = false;
                     try {
                         const devices = await Html5Qrcode.getCameras();
-                        const backCamera = devices.find((d) => /back|rear|environment|world/i.test(d.label));
+                        const backCamera = devices.find((d) => /back|rear|environment|world|trase|poste/i.test(d.label))
+                            || (devices.length > 1 ? devices[devices.length - 1] : null);
                         if (backCamera) {
                             await html5QrCode.start(
                                 { deviceId: { exact: backCamera.id } },
