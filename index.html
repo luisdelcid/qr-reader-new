@@ -13,13 +13,23 @@
                 width: 100%;
                 height: 100%;
             }
-            #html5-qrcode video {
-                object-fit: cover;
+             #html5-qrcode video {
+                 object-fit: cover;
+             }
+            #status {
+                display: block;
+                position: absolute;
+                bottom: 0;
+                z-index: 1;
+                background: rgba(9, 9, 9, 0.46);
+                color: rgb(255, 236, 236);
+                text-align: center;
+                width: 100%;
             }
             /* Cambiar color del thumb a gris (secondary) y hacerlo más grande */
             .custom-range::-webkit-slider-thumb {
-              background-color: #343a40;
-              width: 2.375rem;
+                background-color: #343a40;
+                width: 2.375rem;
               height: 1.5rem;
               margin-top: -0.5rem; /* centrado sobre el track */
               border-radius: 2rem; /* hace que se vea ovalado */
@@ -59,12 +69,10 @@
                 <div class="col-md-4 offset-md-4">
                     <div class="border border-dark my-3">
                         <div class="embed-responsive embed-responsive-1by1">
-                            <div class="embed-responsive-item">
+                            <div class="embed-responsive-item position-relative">
                                 <div id="html5-qrcode" class="h-100 w-100 bg-dark"></div>
+                                <div id="status"></div>
                             </div>
-                        </div>
-                        <div class="border-top border-dark p-3 bg-light">
-                            <div id="status" class="small text-muted"></div>
                         </div>
                         <div class="border-top border-dark p-3">
                             <div class="d-flex flex-row-reverse justify-content-between">
