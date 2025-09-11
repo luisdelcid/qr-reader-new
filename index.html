@@ -19,7 +19,8 @@
             #status {
                 display: block;
                 position: absolute;
-                bottom: 0;
+                top: 0;
+                left: 0;
                 z-index: 1;
                 background: rgba(9, 9, 9, 0.46);
                 color: rgb(255, 236, 236);
@@ -130,6 +131,7 @@
             function setStatus(msg, persist = true) {
                 if (persist) statusMessage = msg || '';
                 $status.textContent = msg || '';
+                $status.style.display = state === 'paused' ? 'none' : 'block';
             }
 
             function updateButtons() {
