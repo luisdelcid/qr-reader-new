@@ -70,7 +70,7 @@
             const $status = el('status');
 
             // Scanner
-            const html5QrCode = new Html5Qrcode("html5-qrcode");
+            let html5QrCode = new Html5Qrcode("html5-qrcode");
             let state = 'stopped'; // 'stopped' | 'running' | 'paused'
             let hasZoom = false;
             let hasTorch = false;
@@ -235,6 +235,15 @@
                     try {
                         await html5QrCode.start(cameraConfigStrict, config, onScanSuccess, onScanFailure);
                     } catch (_) {
+                        // If strict constraints fail, the html5-qrcode instance can remain
+                        // in a transitional state. Recreate it before retrying to avoid
+                        // "Cannot transition to a new state" errors.
+                        try {
+                            await html5QrCode.clear();
+                        } catch (_) {
+                            /* ignore */
+                        }
+                        html5QrCode = new Html5Qrcode("html5-qrcode");
                         await html5QrCode.start(cameraConfigFallback, config, onScanSuccess, onScanFailure);
                     }
                     state = 'running';
