@@ -125,8 +125,12 @@
             let zoomMax = 1;
             let zoomStep = 0.1;
             let currentZoom = 1;
+            let statusMessage = '';
 
-            function setStatus(msg) { $status.textContent = msg || ''; }
+            function setStatus(msg, persist = true) {
+                if (persist) statusMessage = msg || '';
+                $status.textContent = msg || '';
+            }
 
             function updateButtons() {
                 // Zoom controls
@@ -406,7 +410,13 @@
 
             $zoomRange.addEventListener('input', (e) => {
                 if (!hasZoom || state === 'stopped') return;
+                const val = Math.round(e.target.value * 100) / 100;
+                setStatus('Zoom: ' + val + 'x', false);
                 applyZoom(e.target.value);
+            });
+
+            $zoomRange.addEventListener('change', () => {
+                setStatus(statusMessage);
             });
 
             // Estado inicial
