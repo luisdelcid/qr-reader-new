@@ -22,7 +22,8 @@
                 top: 0;
                 left: 0;
                 z-index: 1;
-                background: rgba(9, 9, 9, 0.46);
+                /*background: rgba(9, 9, 9, 0.46);*/
+                background: #343a40;
                 color: #FFECEC;
                 text-align: center;
                 width: 100%;
@@ -68,7 +69,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 offset-md-4">
-                    <div class="border border-dark my-3">
+                    <div class="bg-dark mt-3" style="height: 12px; border-top-right-radius: 12px; border-top-left-radius: 12px;"></div>
+                    <div class="border border-dark mb-3" style="border-bottom-right-radius: 36px; border-bottom-left-radius: 36px;">
                         <div class="embed-responsive embed-responsive-1by1">
                             <div class="embed-responsive-item">
                                 <div id="html5-qrcode" class="h-100 w-100 bg-dark"></div>
@@ -76,19 +78,19 @@
                             </div>
                         </div>
                         <div class="border-top border-dark p-3">
-                            <div class="d-flex flex-row-reverse justify-content-between">
-                                <button id="play" type="button" class="btn btn-dark px-2 rounded-pill" title="Play"><i class="fa-solid fa-play fa-fw"></i></button>
-                                <button id="pause" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Pause"><i class="fa-solid fa-pause fa-fw"></i></button>
-                                <button id="zoom" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Reset Zoom"><i class="fa-solid fa-magnifying-glass fa-fw"></i></button>
-                                <button id="torch" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Torch"><i class="fa-solid fa-bolt-lightning fa-fw"></i></button>
-                                <button id="stop" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Stop"><i class="fa-solid fa-stop fa-fw"></i></button>
-                            </div>
-                            <div id="zoom-in-out" class="justify-content-between mt-3 d-none">
+                            <div id="zoom-in-out" class="justify-content-between mb-3 d-none">
                                 <div id="zoom-min" class="small text-muted">x</div>
                                 <div class="flex-grow-1 mx-3">
                                     <input id="zoom-range" type="range" class="custom-range" />
                                 </div>
                                 <div id="zoom-max" class="small text-muted">x</div>
+                            </div>
+                            <div class="d-flex flex-row-reverse justify-content-between">
+                                <button id="play" type="button" class="btn btn-dark px-2 rounded-pill" title="Play"><i class="fa-solid fa-play fa-fw"></i></button>
+                                <button id="pause" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Pause"><i class="fa-solid fa-pause fa-fw"></i></button>
+                                <button id="zoom" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Reset Zoom"><i class="fa-solid fa-1 fa-fw"></i></button>
+                                <button id="torch" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Torch"><i class="fa-solid fa-bolt-lightning fa-fw"></i></button>
+                                <button id="stop" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Stop"><i class="fa-solid fa-stop fa-fw"></i></button>
                             </div>
                         </div>
                     </div>
@@ -250,7 +252,7 @@
             async function startScanner() {
                 if (state !== 'stopped') return;
 
-                setStatus('Iniciando cámara...');
+                setStatus('Iniciando cámara');
                 // Prefer rear camera. Try strict environment; if it fails, use non-strict.
                 const squareCameraConstraints = {
                     width: { ideal: 720 },
@@ -322,7 +324,7 @@
                         }
                     }
                     state = 'running';
-                    setStatus('Lector iniciado.');
+                    setStatus('Scanner iniciado');
                     await readCapabilitiesAndSetupUI();
                 } catch (err) {
                     setStatus('No se pudo iniciar la cámara: ' + (err && err.message ? err.message : err));
@@ -337,7 +339,7 @@
                 try {
                     await html5QrCode.pause(true); // pause video feed
                     state = 'paused';
-                    setStatus('Lector en pausa.');
+                    setStatus('Scanner en pausa');
                 } catch (err) {
                     setStatus('No se pudo pausar: ' + err);
                 } finally {
@@ -350,7 +352,7 @@
                 try {
                     await html5QrCode.resume();
                     state = 'running';
-                    setStatus('Lector reanudado.');
+                    setStatus('Scanner reanudado');
                 } catch (err) {
                     setStatus('No se pudo reanudar: ' + err);
                 } finally {
@@ -360,7 +362,7 @@
 
             async function stopScanner() {
                 if (state === 'stopped') return;
-                setStatus('Deteniendo...');
+                setStatus('Deteniendo');
                 try {
                     await html5QrCode.stop();
                     await html5QrCode.clear();
@@ -381,7 +383,7 @@
                     $zoomRange.step = 0.1;
                     $zoomMin.textContent = 'x';
                     $zoomMax.textContent = 'x';
-                    setStatus('Lector detenido.');
+                    setStatus('Scanner detenido');
                     updateButtons();
                 }
             }
@@ -413,7 +415,8 @@
             $zoomRange.addEventListener('input', (e) => {
                 if (!hasZoom || state === 'stopped') return;
                 const val = Math.round(e.target.value * 100) / 100;
-                setStatus('Zoom: ' + val + 'x', false);
+                //setStatus('Zoom: ' + val + 'x', false);
+                setStatus(val + 'x', false);
                 applyZoom(e.target.value);
             });
 
@@ -423,7 +426,8 @@
 
             // Estado inicial
             updateButtons();
-            setStatus('Listo. Presiona “Play” para iniciar el lector.');
+            //setStatus('Listo. Presiona “Play” para iniciar el lector.');
+            setStatus('Scanner listo');
         })();
         </script>
     </body>
