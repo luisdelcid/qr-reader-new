@@ -384,6 +384,11 @@
                     $zoomRange.step = 0.1;
                     $zoomMin.textContent = 'x';
                     $zoomMax.textContent = 'x';
+                    // Reset torch state when no camera is active
+                    hasTorch = false;
+                    torchOn = false;
+                    $btnTorch.classList.add('btn-dark');
+                    $btnTorch.classList.remove('btn-warning');
                     setStatus('Scanner detenido');
                     updateButtons();
                 }
