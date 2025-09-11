@@ -243,6 +243,7 @@
                 try {
                     await html5QrCode.applyVideoConstraints({ advanced: [{ torch: !!on }] });
                     torchOn = !!on;
+                    $btnTorch.classList.toggle('btn-dark', !torchOn);
                     $btnTorch.classList.toggle('btn-warning', torchOn);
                 } catch (err) {
                     console.warn('Torch not applied:', err);
