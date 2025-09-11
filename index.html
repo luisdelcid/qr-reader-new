@@ -8,6 +8,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- html5-qrcode -->
         <script src="https://unpkg.com/html5-qrcode@2.3.10/html5-qrcode.min.js"></script>
+        <style>
+            #html5-qrcode, #html5-qrcode video {
+                width: 100%;
+                height: 100%;
+            }
+            #html5-qrcode video {
+                object-fit: cover;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -44,9 +53,6 @@
         <!-- jQuery (slim) + Bootstrap bundle -->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
-        <!-- html5-qrcode SIEMPRE antes de tu script -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js" integrity="sha512-r6rDA7W6ZeQhvl8S7yRVQUKVHdexq+GAlNkNNqVC7YyIV+NwqCTJe2hDWCiffTyRNOeGEzRRJ9ifvRm/HCzGYg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script>
         (function() {
@@ -195,11 +201,17 @@
 
                 setStatus('Iniciando cámara...');
                 // Prefer rear camera. Try strict environment; if it fails, use non-strict.
-                const cameraConfigStrict = { facingMode: { exact: "environment" } };
-                const cameraConfigFallback = { facingMode: "environment" };
+                const squareCameraConstraints = {
+                    width: { ideal: 720 },
+                    height: { ideal: 720 },
+                    aspectRatio: 1
+                };
+                const cameraConfigStrict = { facingMode: { exact: "environment" }, ...squareCameraConstraints };
+                const cameraConfigFallback = { facingMode: "environment", ...squareCameraConstraints };
 
                 const config = {
                     fps: 30,
+                    aspectRatio: 1,
                     // Asegura un área de escaneo cuadrada para ocupar todo el contenedor
                     qrbox: (viewfinderWidth, viewfinderHeight) => {
                         const minEdge = Math.min(viewfinderWidth, viewfinderHeight);
