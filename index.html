@@ -7,7 +7,7 @@
         <title>Hello, world!</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- html5-qrcode -->
-        <script src="https://unpkg.com/html5-qrcode@2.3.10/html5-qrcode.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js" integrity="sha512-r6rDA7W6ZeQhvl8S7yRVQUKVHdexq+GAlNkNNqVC7YyIV+NwqCTJe2hDWCiffTyRNOeGEzRRJ9ifvRm/HCzGYg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <style>
             #html5-qrcode, #html5-qrcode video {
                 width: 100%;
@@ -206,8 +206,8 @@
                     height: { ideal: 720 },
                     aspectRatio: 1
                 };
-                const cameraConfigStrict = { facingMode: { exact: "environment" }, ...squareCameraConstraints };
-                const cameraConfigFallback = { facingMode: "environment", ...squareCameraConstraints };
+                const cameraConfigStrict = { facingMode: { exact: "environment" } };
+                const cameraConfigFallback = { facingMode: "environment" };
 
                 const config = {
                     fps: 30,
@@ -219,7 +219,8 @@
                     },
                     rememberLastUsedCamera: true,
                     supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-                    formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE]
+                    formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
+                    videoConstraints: squareCameraConstraints
                 };
 
                 const onScanSuccess = (decodedText, decodedResult) => {
