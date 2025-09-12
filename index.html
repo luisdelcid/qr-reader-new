@@ -117,7 +117,6 @@
                                     <div class="d-flex flex-row-reverse justify-content-between">
                                         <button id="play" type="button" class="btn btn-dark px-2 rounded-pill" title="Play"><i class="fa-solid fa-play fa-fw"></i></button>
                                         <button id="pause" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Pause"><i class="fa-solid fa-pause fa-fw"></i></button>
-                                        <button id="stop" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Stop"><i class="fa-solid fa-stop fa-fw"></i></button>
                                         <button id="zoom" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Reset Zoom"><i class="fa-solid fa-1 fa-fw"></i></button>
                                         <button id="torch" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Torch"><i class="fa-solid fa-bolt-lightning fa-fw"></i></button>
                                         <button id="close" type="button" class="btn btn-dark px-2 rounded-pill" title="Close"><i class="fa-solid fa-xmark fa-fw"></i></button>
@@ -153,7 +152,6 @@
             const $btnTorch = el('torch');
             const $btnPlay = el('play');
             const $btnPause = el('pause');
-            const $btnStop = el('stop');
             const $btnZoomReset = el('zoom');
             const $btnClose = el('close');
             const $btnOpen = el('open');
@@ -195,19 +193,16 @@
                 // Torch
                 $btnTorch.classList.toggle('d-none', !hasTorch || state === 'stopped');
 
-                // Play / Pause / Stop
+                // Play / Pause
                 if (state === 'stopped') {
                     $btnPlay.classList.remove('d-none');
                     $btnPause.classList.add('d-none');
-                    $btnStop.classList.add('d-none');
                 } else if (state === 'running') {
                     $btnPlay.classList.add('d-none');
                     $btnPause.classList.remove('d-none');
-                    $btnStop.classList.remove('d-none');
                 } else if (state === 'paused') {
                     $btnPlay.classList.remove('d-none');
                     $btnPause.classList.add('d-none');
-                    $btnStop.classList.remove('d-none');
                 }
             }
 
@@ -447,10 +442,6 @@
                 if (state === 'running') pauseScanner();
             });
 
-            $btnStop.addEventListener('click', () => {
-                if (state !== 'stopped') stopScanner();
-            });
-
             $btnTorch.addEventListener('click', () => {
                 if (!hasTorch || state === 'stopped') return;
                 setTorch(!torchOn);
@@ -473,14 +464,18 @@
                 setStatus(statusMessage);
             });
 
-            $btnClose.addEventListener('click', () => {
+            $btnClose.addEventListener('click', async () => {
+                await stopScanner();
                 $lectorQr.classList.remove('abierto');
                 $lectorQr.classList.add('cerrado');
             });
 
-            $btnOpen.addEventListener('click', () => {
+            $btnOpen.addEventListener('click', async () => {
                 $lectorQr.classList.remove('cerrado');
                 $lectorQr.classList.add('abierto');
+                if (state === 'stopped') {
+                    await startScanner();
+                }
             });
 
             // Estado inicial
