@@ -155,6 +155,9 @@
             const $btnPause = el('pause');
             const $btnStop = el('stop');
             const $btnZoomReset = el('zoom');
+            const $btnClose = el('close');
+            const $btnOpen = el('open');
+            const $lectorQr = el('lector-qr');
             const $status = el('status');
 
             // Scanner
@@ -468,6 +471,16 @@
 
             $zoomRange.addEventListener('change', () => {
                 setStatus(statusMessage);
+            });
+
+            $btnClose.addEventListener('click', () => {
+                $lectorQr.classList.remove('abierto');
+                $lectorQr.classList.add('cerrado');
+            });
+
+            $btnOpen.addEventListener('click', () => {
+                $lectorQr.classList.remove('cerrado');
+                $lectorQr.classList.add('abierto');
             });
 
             // Estado inicial
