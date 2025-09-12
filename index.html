@@ -184,11 +184,12 @@
                 // add it back when showing to avoid conflicts with `d-none`.
                 $zoomWrap.classList.toggle('d-flex', showZoom);
                 $zoomWrap.classList.toggle('d-none', !showZoom);
-                $btnZoomReset.classList.toggle('d-none', !showZoom);
                 // Disable zoom slider when paused or zoom unsupported
                 $zoomRange.disabled = !hasZoom || state !== 'running';
-                // Enable reset only when zoom differs from default
-                $btnZoomReset.disabled = !hasZoom || state !== 'running' || currentZoom === zoomDefault;
+                // Show reset only when zoom differs from default
+                const showZoomReset = showZoom && currentZoom !== zoomDefault;
+                $btnZoomReset.classList.toggle('d-none', !showZoomReset);
+                $btnZoomReset.disabled = !hasZoom || state !== 'running';
 
                 // Torch
                 $btnTorch.classList.toggle('d-none', !hasTorch || state === 'stopped');
