@@ -67,12 +67,12 @@
             #lector-qr {
                 display: block;
                 position: absolute;
-                right: 1.5rem;
-                bottom: 1.5rem;
+                right: 2rem;
+                bottom: 2rem;
                 height: auto;
             }
             #lector-qr.abierto {
-                width: calc(100% - 3rem);
+                width: calc(100% - 4rem);
             }
             #lector-qr.cerrado {
                 width: auto;
@@ -106,7 +106,7 @@
                                         <div id="status" class="text-truncate"></div>
                                     </div>
                                 </div>
-                                <div class="border-top border-dark p-3">
+                                <div class="p-3">
                                     <div id="zoom-in-out" class="justify-content-between mb-3 d-none">
                                         <div id="zoom-min" class="small text-muted">x</div>
                                         <div class="flex-grow-1 mx-3">
@@ -115,11 +115,11 @@
                                         <div id="zoom-max" class="small text-muted">x</div>
                                     </div>
                                     <div class="d-flex flex-row-reverse justify-content-between">
+                                        <button id="close" type="button" class="btn btn-dark px-2 rounded-pill" title="Close"><i class="fa-solid fa-xmark fa-fw"></i></button>
                                         <button id="play" type="button" class="btn btn-dark px-2 rounded-pill" title="Play"><i class="fa-solid fa-play fa-fw"></i></button>
                                         <button id="pause" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Pause"><i class="fa-solid fa-pause fa-fw"></i></button>
                                         <button id="zoom" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Reset Zoom"><i class="fa-solid fa-1 fa-fw"></i></button>
                                         <button id="torch" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Torch"><i class="fa-solid fa-bolt-lightning fa-fw"></i></button>
-                                        <button id="close" type="button" class="btn btn-dark px-2 rounded-pill" title="Close"><i class="fa-solid fa-xmark fa-fw"></i></button>
                                     </div>
                                 </div>
                             </div>
