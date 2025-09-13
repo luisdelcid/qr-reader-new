@@ -104,32 +104,34 @@
 
                     <div id="lector-qr" class="cerrado">
                         <div class="lector-abierto">
-                            <div class="bg-dark" style="height: 12px; border-top-right-radius: 12px; border-top-left-radius: 12px;"></div>
-                            <div class="embed-responsive embed-responsive-1by1 border-left border-right border-dark">
-                                <div class="embed-responsive-item">
-                                    <div id="html5-qrcode" class="h-100 w-100 bg-dark"></div>
-                                    <div id="status" class="text-truncate"></div>
-                                </div>
-                            </div>
-                            <div class="p-3 bg-light border border-dark" style="border-bottom-right-radius: 36px; border-bottom-left-radius: 36px;">
-                                <div id="zoom-in-out" class="justify-content-between mb-3 d-none">
-                                    <div id="zoom-min" class="small text-muted">x</div>
-                                    <div class="flex-grow-1 mx-3">
-                                        <input id="zoom-range" type="range" class="custom-range" />
+                            <div class="border border-dark bg-white shadow-lg" style="border-top-right-radius: calc(1rem + 1px); border-top-left-radius: calc(1rem + 1px); border-bottom-right-radius: 36px; border-bottom-left-radius: 36px;">
+                                <div class="bg-dark" style="height: 1rem; border-top-right-radius: 1rem; border-top-left-radius: 1rem;"></div>
+                                <div class="embed-responsive embed-responsive-1by1 bg-dark">
+                                    <div class="embed-responsive-item">
+                                        <div id="html5-qrcode" class="h-100 w-100"></div>
+                                        <div id="status" class="text-truncate"></div>
                                     </div>
-                                    <div id="zoom-max" class="small text-muted">x</div>
                                 </div>
-                                <div class="d-flex flex-row-reverse justify-content-between">
-                                    <button id="close" type="button" class="btn btn-dark px-2 rounded-pill" title="Close"><i class="fa-solid fa-xmark fa-fw"></i></button>
-                                    <button id="play" type="button" class="btn btn-dark px-2 rounded-pill" title="Play"><i class="fa-solid fa-play fa-fw"></i></button>
-                                    <button id="pause" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Pause"><i class="fa-solid fa-pause fa-fw"></i></button>
-                                    <button id="zoom" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Reset Zoom"><i class="fa-solid fa-1 fa-fw"></i></button>
-                                    <button id="torch" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Torch"><i class="fa-solid fa-bolt-lightning fa-fw"></i></button>
+                                <div class="p-3 border-top border-dark">
+                                    <div id="zoom-in-out" class="justify-content-between mb-3 d-none">
+                                        <div id="zoom-min" class="small text-muted">x</div>
+                                        <div class="flex-grow-1 mx-3">
+                                            <input id="zoom-range" type="range" class="custom-range" />
+                                        </div>
+                                        <div id="zoom-max" class="small text-muted">x</div>
+                                    </div>
+                                    <div class="d-flex flex-row-reverse justify-content-between">
+                                        <button id="close" type="button" class="btn btn-dark px-2 rounded-pill" title="Close"><i class="fa-solid fa-xmark fa-fw"></i></button>
+                                        <button id="play" type="button" class="btn btn-dark px-2 rounded-pill" title="Play"><i class="fa-solid fa-play fa-fw"></i></button>
+                                        <button id="pause" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Pause"><i class="fa-solid fa-pause fa-fw"></i></button>
+                                        <button id="zoom" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Reset Zoom"><i class="fa-solid fa-1 fa-fw"></i></button>
+                                        <button id="torch" type="button" class="btn btn-dark px-2 rounded-pill d-none" title="Torch"><i class="fa-solid fa-bolt-lightning fa-fw"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="lector-cerrado">
-                            <div class="border border-dark bg-light p-3" style="border-radius: 36px;">
+                            <div class="border border-dark bg-white p-3 shadow-lg rounded-circle">
                                 <button id="open" type="button" class="btn btn-dark px-2 rounded-pill" title="Open"><i class="fa-solid fa-qrcode fa-fw"></i></button>
                             </div>
                         </div>
