@@ -73,21 +73,43 @@
             }
             #lector-qr.abierto {
                 width: calc(100% - 4rem);
+                pointer-events: auto;
             }
             #lector-qr.cerrado {
                 width: auto;
+                pointer-events: none;
+            }
+            #lector-qr .lector-abierto,
+            #lector-qr .lector-cerrado {
+                transform-origin: bottom right;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+            #lector-qr .lector-abierto {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
             }
             #lector-qr.cerrado > .lector-abierto {
-                display: none;
+                transform: scale(0);
+                opacity: 0;
+                pointer-events: none;
             }
             #lector-qr.cerrado > .lector-cerrado {
-                display: block;
+                transform: scale(1);
+                opacity: 1;
+                pointer-events: auto;
             }
             #lector-qr.abierto > .lector-abierto {
-                display: block;
+                transform: scale(1);
+                opacity: 1;
+                pointer-events: auto;
             }
             #lector-qr.abierto > .lector-cerrado {
-                display: none;
+                transform: scale(0);
+                opacity: 0;
+                pointer-events: none;
             }
 
             @media (min-width: 576px) {
